@@ -19,6 +19,7 @@ function Multer (options) {
 
   this.limits = options.limits
   this.fileFilter = options.fileFilter || allowAll
+  this.allowEmptyFilename = options.allowEmptyFilename || false
 }
 
 Multer.prototype._makeMiddleware = function (fields, fileStrategy) {
@@ -47,7 +48,8 @@ Multer.prototype._makeMiddleware = function (fields, fileStrategy) {
       limits: this.limits,
       storage: this.storage,
       fileFilter: wrappedFileFilter,
-      fileStrategy: fileStrategy
+      fileStrategy: fileStrategy,
+      allowEmptyFilename: this.allowEmptyFilename
     }
   }
 
@@ -72,7 +74,8 @@ Multer.prototype.any = function () {
       limits: this.limits,
       storage: this.storage,
       fileFilter: this.fileFilter,
-      fileStrategy: 'ARRAY'
+      fileStrategy: 'ARRAY',
+      allowEmptyFilename: this.allowEmptyFilename
     }
   }
 
